@@ -83,7 +83,7 @@
                 </div>
     </header>
             <!-- Page Content -->
-            <main class="dark:bg-gray-700">
+            <main class="dark:bg-gray-700 min-h-screen">
                 <slot />
             </main>
 </template>
