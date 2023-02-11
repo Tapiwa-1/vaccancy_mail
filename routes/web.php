@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\PermissionController;
 use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\Employer\JobController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
@@ -52,6 +53,18 @@ Route::middleware(['auth', 'role:admin'])->name('admin.')->prefix('admin')->grou
     Route::delete('/users/{user}/permissions/{permission}', [UserController::class, 'revokePermission'])->name('users.permissions.revoke');
 });
 
+/**
+     ** Employer routes here
+     ** Employer should create a job, edit, view or delete
+     *todo - Create a job resource Add, Edit, Show , delete
+
+*/
+Route::middleware(['auth', 'role:employer'])->name('employer.')->prefix('employer')->group(function () {
+    Route::get('/', function () {
+        return Inertia::render('Employer/Dashboard');
+    })->name('index');
+    Route::resource('/jobs', JobController::class);
+});
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

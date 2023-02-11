@@ -6,7 +6,7 @@ use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
-class AdminSeeder extends Seeder
+class UserSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -16,10 +16,9 @@ class AdminSeeder extends Seeder
     public function run()
     {
         $user= User::factory()->create([
-            'name' => 'Admin',
-            'email' => 'admin@example.com',
+            'name' => 'User',
+            'email' => 'user@example.com',
         ]);
-        $user->assignRole('admin');
-
+        $user->assignRole('user');
     }
 }
