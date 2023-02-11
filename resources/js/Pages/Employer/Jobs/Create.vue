@@ -18,6 +18,7 @@ defineProps({
 
 const form = useForm({
     jobDescription: '',
+    jobTitle:''
 });
 const submit = () => {
     form.post(route('employer.jobs.store')
@@ -40,9 +41,27 @@ const submit = () => {
                          <div class="py-12">
                             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                                 <form class="m-1" @submit.prevent="submit">
+                                     <div>
+                                            <InputLabel for="name" value="Job Title" />
+
+                                            <TextInput
+                                                id="name"
+                                                type="text"
+                                                class="mt-1 block w-full"
+                                                v-model="form.jobTitle"
+
+                                                autofocus
+                                                autocomplete="jobTitle"
+                                            />
+
+                                            <InputError class="mt-2" :message="form.errors.jobTitle" />
+                                        </div>
+                                    <InputLabel for="jobDescription" value="Job Description" />
+
                                     <div class="h-80 overflow-hidden shadow-sm sm:rounded-lg dark:text-white">
                                         <QuillEditor class=" min-h-full" v-model:content="form.jobDescription" contentType="html" theme="snow"  toolbar="full"/>
                                     </div>
+                                     <InputError class="mt-2" :message="form.errors.jobDescription" />
                                     <div class="flex items-center justify-end mt-4">
                                         <PrimaryButton class="ml-4" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
                                             Post Job

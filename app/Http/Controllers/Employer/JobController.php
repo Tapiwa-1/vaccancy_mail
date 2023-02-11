@@ -40,6 +40,10 @@ class JobController extends Controller
      */
     public function store(Request $request)
     {
+         $validated = $request->validate([
+            'jobTitle' => 'required',
+            'jobDescription' =>'required',
+        ]);
         dd($request);
     }
 
