@@ -18,6 +18,7 @@ const props = defineProps({
 const form = useForm({
     jobDescription: props.job.jobDescription,
     jobTitle: props.job.jobTitle,
+    jobSummary: props.job.jobSummary,
     dueDate: props.job.dueDate
 });
 const submit = () => {
@@ -49,8 +50,6 @@ const submit = () => {
                                                 type="text"
                                                 class="mt-1 block w-full"
                                                 v-model="form.jobTitle"
-
-                                                autofocus
                                                 autocomplete="jobTitle"
                                             />
 
@@ -68,6 +67,21 @@ const submit = () => {
                                             />
 
                                             <InputError class="mt-2" :message="form.errors.dueDate" />
+                                        </div>
+                                         <div>
+                                            <InputLabel for="name" value="Job Summary" />
+
+                                            <TextInput
+                                                id="name"
+                                                type="text"
+                                                class="mt-1 block w-full"
+                                                v-model="form.jobSummary"
+
+                                                autofocus
+                                                autocomplete="jobSummary"
+                                            />
+
+                                            <InputError class="mt-2" :message="form.errors.jobSummary" />
                                         </div>
                                     <InputLabel for="jobDescription" value="Job Description" />
 

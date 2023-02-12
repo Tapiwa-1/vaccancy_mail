@@ -1,6 +1,6 @@
 <template>
 
-  <Popover class="relative bg-gray-50 dark:bg-gray-800 ">
+  <Popover class="relative bg-gray-50 dark:bg-gray-800 sticky top-0 z-50">
     <div class="mx-auto max-w-full px-4 sm:px-6 ">
       <div class="flex items-center justify-between py-2 md:justify-start md:space-x-10">
         <div class="flex justify-start lg:w-0 lg:flex-1">

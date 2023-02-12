@@ -44,6 +44,7 @@ class JobController extends Controller
             'jobTitle' => 'required',
             'jobDescription' =>'required',
             'dueDate'=>'required',
+            'jobSummary'=>'required'
         ]);
         // dd($validated);
         Job::create($validated);
@@ -88,12 +89,14 @@ class JobController extends Controller
             'jobTitle' => 'required',
             'jobDescription' =>'required',
             'dueDate'=>'required',
+            'jobSummary'=>'required'
             ]);
         // dd($validated);
         $job->update([
             'jobTitle' => $request->jobTitle,
             'jobDescription'=> $request->jobDescription,
-            'dueDate'=> $request->dueDate
+            'dueDate'=> $request->dueDate,
+            'jobSummary'=> $request->jobSummary
         ]);
         return to_route('employer.jobs.index')->with('message','job edited successfully');
     }

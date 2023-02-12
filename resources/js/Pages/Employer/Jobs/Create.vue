@@ -19,6 +19,7 @@ defineProps({
 const form = useForm({
     jobDescription: '',
     jobTitle:'',
+    jobSummary:'',
     dueDate:''
 });
 const submit = () => {
@@ -69,6 +70,19 @@ const submit = () => {
                                             />
 
                                             <InputError class="mt-2" :message="form.errors.dueDate" />
+                                        </div>
+                                        <div>
+                                            <InputLabel for="name" value="Job Summary" />
+
+                                            <TextInput
+                                                id="name"
+                                                type="text"
+                                                class="mt-1 block w-full"
+                                                v-model="form.jobSummary"
+                                                autocomplete="jobSummary"
+                                            />
+
+                                            <InputError class="mt-2" :message="form.errors.jobSummary" />
                                         </div>
                                     <InputLabel for="jobDescription" value="Job Description" />
 
