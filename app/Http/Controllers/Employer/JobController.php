@@ -16,8 +16,8 @@ class JobController extends Controller
      */
     public function index()
     {
-
-        return Inertia::render('Employer/Jobs/Index');
+        $jobs = Job::all();
+        return Inertia::render('Employer/Jobs/Index',compact('jobs'));
 
     }
 
@@ -40,11 +40,14 @@ class JobController extends Controller
      */
     public function store(Request $request)
     {
-         $validated = $request->validate([
+        $validated = $request->validate([
             'jobTitle' => 'required',
             'jobDescription' =>'required',
+            'dueDate'=>'required',
         ]);
-        dd($request);
+        // dd($validated);
+        Job::create($validated);
+        return to_route('employer.jobs.index')->with('message','job added successfully');
     }
 
     /**
@@ -53,9 +56,10 @@ class JobController extends Controller
      * @param  \App\Models\Job  $job
      * @return \Illuminate\Http\Response
      */
-    public function show(Job $job)
+    public function show($slug)
     {
-        //
+        $job = Job::where('slug', $slug)->first();
+        return Inertia::render("Employer/Jobs/Show", compact('job'));
     }
 
     /**
@@ -67,6 +71,8 @@ class JobController extends Controller
     public function edit(Job $job)
     {
         //
+
+        return Inertia::render('Employer/Jobs/Edit',compact('job'));
     }
 
     /**
@@ -78,7 +84,18 @@ class JobController extends Controller
      */
     public function update(Request $request, Job $job)
     {
-        //
+           $validated = $request->validate([
+            'jobTitle' => 'required',
+            'jobDescription' =>'required',
+            'dueDate'=>'required',
+            ]);
+        // dd($validated);
+        $job->update([
+            'jobTitle' => $request->jobTitle,
+            'jobDescription'=> $request->jobDescription,
+            'dueDate'=> $request->dueDate
+        ]);
+        return to_route('employer.jobs.index')->with('message','job edited successfully');
     }
 
     /**
@@ -89,6 +106,7 @@ class JobController extends Controller
      */
     public function destroy(Job $job)
     {
-        //
+        $job->delete();
+        return to_route('employer.jobs.index')->with('message','job deleted successfully');
     }
 }

@@ -3,7 +3,7 @@ import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import { Head, Link } from '@inertiajs/vue3';
 
 defineProps({
-    roles: Object
+    jobs: Object
 })
 </script>
 
@@ -28,7 +28,10 @@ defineProps({
                             <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-900 dark:text-gray-400">
                                 <tr>
                                     <th scope="col" class="px-6 py-3">
-                                        Name
+                                        Job title
+                                    </th>
+                                    <th scope="col" class="px-6 py-3">
+                                        Due Date
                                     </th>
                                     <th scope="col" class="px-6 py-3">
                                         Action
@@ -37,13 +40,17 @@ defineProps({
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr v-for="role in roles" :key="role.id" class="bg-white border-b dark:bg-gray-900 dark:border-gray-700">
+                                <tr v-for="job in jobs" :key="job.id" class="bg-white border-b dark:bg-gray-900 dark:border-gray-700">
                                     <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                        {{role.name  }}
+                                        {{job.jobTitle  }}
+                                    </th>
+                                     <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                        {{job.dueDate  }}
                                     </th>
                                     <td class="px-6 py-4">
-                                        <Link :href="route('admin.roles.edit',role.id)" class="font-medium mr-1 text-blue-600 dark:text-blue-500 hover:underline">Edit</Link>
-                                        <Link method="delete" as="button" ae :href="route('admin.roles.destroy', role.id)"  class="font-medium text-red-600 dark:text-red-500 hover:underline">Delete</Link>
+                                        <Link :href="route('employer.jobs.show',job.slug)" class="font-medium mr-1 text-blue-600 dark:text-blue-500 hover:underline">Show</Link>
+                                          <Link :href="route('employer.jobs.edit',job.slug)" class="font-medium mr-1 text-blue-600 dark:text-blue-500 hover:underline">Edit</Link>
+                                        <Link method="delete" as="button" ae :href="route('employer.jobs.destroy', job.slug)"  class="font-medium text-red-600 dark:text-red-500 hover:underline">Delete</Link>
                                     </td>
                                 </tr>
                             </tbody>

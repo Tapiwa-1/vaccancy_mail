@@ -18,7 +18,8 @@ defineProps({
 
 const form = useForm({
     jobDescription: '',
-    jobTitle:''
+    jobTitle:'',
+    dueDate:''
 });
 const submit = () => {
     form.post(route('employer.jobs.store')
@@ -56,10 +57,23 @@ const submit = () => {
 
                                             <InputError class="mt-2" :message="form.errors.jobTitle" />
                                         </div>
+                                          <div>
+                                            <InputLabel for="name" value="Job Title" />
+
+                                            <TextInput
+                                                id="date"
+                                                type="date"
+                                                class="mt-1 block w-full"
+                                                v-model="form.dueDate"
+                                                autocomplete="dueDate"
+                                            />
+
+                                            <InputError class="mt-2" :message="form.errors.dueDate" />
+                                        </div>
                                     <InputLabel for="jobDescription" value="Job Description" />
 
                                     <div class="h-80 overflow-hidden shadow-sm sm:rounded-lg dark:text-white">
-                                        <QuillEditor class=" min-h-full" v-model:content="form.jobDescription" contentType="html" theme="snow"  toolbar="full"/>
+                                        <QuillEditor class=" min-h-full" v-model:content="form.jobDescription" contentType="html" theme="snow"  toolbar="minimum"/>
                                     </div>
                                      <InputError class="mt-2" :message="form.errors.jobDescription" />
                                     <div class="flex items-center justify-end mt-4">
