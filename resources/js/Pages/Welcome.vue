@@ -18,11 +18,10 @@
                 <hr class="my-5">
                 <div class="md:flex">
                     <div class=" w-[400px]">
-                         <div class=" md:max-w-md p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
-                            <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Job Categories</h5>
-                            <p class="mb-2 text-md tracking-tight text-gray-900 dark:text-white">Category(0)</p>
-                            <p class="mb-2 text-md tracking-tight text-gray-900 dark:text-white">Category(0)</p>
-                            <p class="mb-2 text-md tracking-tight text-gray-900 dark:text-white">Category(0)</p>
+                         <div class=" md:max-w-md p-6 ">
+                            <h5 class="mb-2 text-xl font-bold tracking-tight text-gray-900 dark:text-white">Job Categories</h5>
+                            <p v-for="category in categories" :key="category.id"  class="mb-2 text-sm tracking-tight text-gray-900 dark:text-white">{{category.name}}(0)</p>
+
                         </div>
                     </div>
                     <div  class=" w-full px-2">
@@ -49,7 +48,8 @@ import Nav from '@/Layouts/Nav.vue';
 import JobCard from '@/Components/JobCard.vue';
 import { ref } from 'vue';
 const props = defineProps({
-    jobs: Object
+    jobs: Object,
+    categories: Object
 });
 
 </script>
