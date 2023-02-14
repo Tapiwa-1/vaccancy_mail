@@ -8,6 +8,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use Cviebrock\EloquentSluggable\Sluggable;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable
@@ -54,5 +55,12 @@ class User extends Authenticatable
     public function getRouteKeyName()
     {
         return 'slug';
+    }
+    /**
+     * Get the Jobs for the user.
+     */
+    public function jobs(): HasMany
+    {
+        return $this->hasMany(Job::class);
     }
 }

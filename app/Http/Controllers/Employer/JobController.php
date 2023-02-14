@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Employer;
 use App\Http\Controllers\Controller;
 use App\Models\Job;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
 
 class JobController extends Controller
@@ -47,7 +48,7 @@ class JobController extends Controller
             'jobSummary'=>'required'
         ]);
         // dd($validated);
-        Job::create($validated);
+        Job::create($validated + ['user_id'=> Auth()->id()]);
         return to_route('employer.jobs.index')->with('message','job added successfully');
     }
 
@@ -96,7 +97,8 @@ class JobController extends Controller
             'jobTitle' => $request->jobTitle,
             'jobDescription'=> $request->jobDescription,
             'dueDate'=> $request->dueDate,
-            'jobSummary'=> $request->jobSummary
+            'jobSummary'=> $request->jobSummary,
+            'user_id'=>Auth()->id()
         ]);
         return to_route('employer.jobs.index')->with('message','job edited successfully');
     }

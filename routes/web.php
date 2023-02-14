@@ -24,20 +24,28 @@ use Inertia\Inertia;
 */
 
 Route::get('/', function () {
-
-    return Inertia::render('Welcome', [
+    return Inertia::render('Frontend/Welcome', [
         'canLogin' => Route::has('login'),
         'canRegister' => Route::has('register'),
         'jobs' =>  Job::all(),
         'categories'=> Category::all(),
     ]);
 });
+Route::get('/job/{slug}', function ($slug){
+    return Inertia::render('Frontend/Job',[
+        'canLogin' => Route::has('login'),
+        'canRegister' => Route::has('register'),
+        'job'=> Job::where('slug', $slug)->first(),
+        'categories'=> Category::all(),
+    ]);
+})->name('job.jobs-details');
 
 
 Route::get('/dashboard', function () {
 
     return Inertia::render('Dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
+
 
 Route::middleware(['auth', 'role:admin'])->name('admin.')->prefix('admin')->group(function () {
     Route::get('/', function () {
