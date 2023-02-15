@@ -42,7 +42,7 @@ defineProps({
                                         {{user.email  }}
                                     </th>
                                     <td class="px-6 py-4">
-                                        <Link :href="route('admin.users.show', user.id)" class="font-medium text-blue-600 mr-2 dark:text-blue-500 hover:underline">Roles</Link>
+                                        <Link :href="route('admin.users.show', user.slug)" class="font-medium text-blue-600 mr-2 dark:text-blue-500 hover:underline">Roles</Link>
                                         <a href="" class="font-medium text-blue-600 mr-2 dark:text-blue-500 hover:underline">Permission</a>
                                     </td>
                                 </tr>

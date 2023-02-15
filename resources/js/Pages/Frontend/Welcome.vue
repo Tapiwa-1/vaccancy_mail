@@ -25,6 +25,7 @@
                         </div>
                     </div>
                     <div  class=" w-full px-2">
+
                         <template v-for="job in jobs" :key="job.id">
                             <JobCard :job="job"/>
                         </template>

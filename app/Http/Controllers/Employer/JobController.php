@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Employer;
 
 use App\Http\Controllers\Controller;
+use App\Models\Category;
 use App\Models\Job;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
@@ -17,7 +19,9 @@ class JobController extends Controller
      */
     public function index()
     {
-        $jobs = Job::all();
+        $jobs = User::find(Auth()->id())->jobs;
+        $category = Category::find()->jobs;
+        dd($category);
         return Inertia::render('Employer/Jobs/Index',compact('jobs'));
 
     }
@@ -29,8 +33,9 @@ class JobController extends Controller
      */
     public function create()
     {
-        //
-        return Inertia::render('Employer/Jobs/Create');
+
+        $categories = Category::all();
+        return Inertia::render('Employer/Jobs/Create', compact('categories'));
     }
 
     /**
@@ -41,14 +46,24 @@ class JobController extends Controller
      */
     public function store(Request $request)
     {
+
         $validated = $request->validate([
             'jobTitle' => 'required',
             'jobDescription' =>'required',
             'dueDate'=>'required',
-            'jobSummary'=>'required'
+            'jobSummary'=>'required',
+            'jobCategory'=>'required'
         ]);
-        // dd($validated);
-        Job::create($validated + ['user_id'=> Auth()->id()]);
+        $jobCategory = $request->jobCategory;
+
+        Job::create([
+            'jobTitle' => $request->jobTitle,
+            'jobDescription'=> $request->jobDescription,
+            'dueDate'=> $request->dueDate,
+            'jobSummary'=> $request->jobSummary,
+            'jobCategory'=> $jobCategory,
+            'user_id'=>Auth()->id(),
+        ]);
         return to_route('employer.jobs.index')->with('message','job added successfully');
     }
 

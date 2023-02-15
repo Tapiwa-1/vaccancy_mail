@@ -8,6 +8,7 @@ use App\Http\Controllers\Employer\JobController;
 use App\Http\Controllers\ProfileController;
 use App\Models\Category;
 use App\Models\Job;
+use App\Models\User;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -27,7 +28,7 @@ Route::get('/', function () {
     return Inertia::render('Frontend/Welcome', [
         'canLogin' => Route::has('login'),
         'canRegister' => Route::has('register'),
-        'jobs' =>  Job::all(),
+        'jobs' =>  Job::with('user')->get(),
         'categories'=> Category::all(),
     ]);
 });
@@ -35,7 +36,7 @@ Route::get('/job/{slug}', function ($slug){
     return Inertia::render('Frontend/Job',[
         'canLogin' => Route::has('login'),
         'canRegister' => Route::has('register'),
-        'job'=> Job::where('slug', $slug)->first(),
+        'job'=> Job::with('user')->where('slug', $slug)->first(),
         'categories'=> Category::all(),
     ]);
 })->name('job.jobs-details');

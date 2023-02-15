@@ -9,10 +9,13 @@ import TextInput from '@/Components/TextInput.vue';
 import { Head, Link, useForm } from '@inertiajs/vue3';
 import { QuillEditor } from '@vueup/vue-quill'
 import '@vueup/vue-quill/dist/vue-quill.snow.css';
+import { onMounted } from 'vue';
+import { initDropdowns } from 'flowbite'
 import { ref } from 'vue';
 defineProps({
     canResetPassword: Boolean,
     status: String,
+    categories: Object
 });
 
 
@@ -20,12 +23,18 @@ const form = useForm({
     jobDescription: '',
     jobTitle:'',
     jobSummary:'',
-    dueDate:''
+    dueDate:'',
+    jobCategory:''
 });
 const submit = () => {
     form.post(route('employer.jobs.store')
     );
 };
+onMounted(() => {
+
+    initDropdowns();
+
+})
 </script>
 
 <template>
@@ -42,6 +51,7 @@ const submit = () => {
                     <div class=" shadow-md sm:rounded-lg">
                          <div class="py-12">
                             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+
                                 <form class="m-1" @submit.prevent="submit">
                                      <div>
                                             <InputLabel for="name" value="Job Title" />
@@ -73,7 +83,6 @@ const submit = () => {
                                         </div>
                                         <div>
                                             <InputLabel for="name" value="Job Summary" />
-
                                             <TextInput
                                                 id="name"
                                                 type="text"
@@ -81,8 +90,17 @@ const submit = () => {
                                                 v-model="form.jobSummary"
                                                 autocomplete="jobSummary"
                                             />
-
                                             <InputError class="mt-2" :message="form.errors.jobSummary" />
+                                        </div>
+                                        <div>
+                                            <InputLabel for="name" value="Job Category" />
+
+                                           <select v-model="form.jobCategory" multiple id="countries_multiple" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                                <option value=" " selected>Choose a category</option>
+                                                <option v-for="category in categories" :key="category.id" :value="category.id">{{category.name  }}</option>
+
+                                            </select>
+                                            <InputError class="mt-2" :message="form.errors.jobCategory" />
                                         </div>
                                     <InputLabel for="jobDescription" value="Job Description" />
 

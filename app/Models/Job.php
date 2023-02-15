@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Job extends Model
@@ -23,7 +24,8 @@ class Job extends Model
         'jobSummary',
         'jobDescription',
         'dueDate',
-        'user_id'
+        'user_id',
+        'jobCategory'
     ];
 
     public function sluggable(): array
@@ -41,9 +43,10 @@ class Job extends Model
     /**
      * Get the Job that owns the user.
      */
-    public function user(): BelongsTo
+    public function user(): HasMany
     {
-        return $this->belongsTo(User::class);
+        return $this->hasMany(User::class);
     }
+
 
 }

@@ -18,7 +18,14 @@ class EmployerSeeder extends Seeder
         $user= User::factory()->create([
             'name' => 'Employer',
             'email' => 'employer@example.com',
-        ]);
-        $user->assignRole('employer');
+        ])->assignRole('employer');
+        $user= User::factory()->create([
+            'name' => 'Employer1',
+            'email' => 'employer1@example.com',
+        ])->assignRole('employer');
+        $user= User::factory()->create([
+            'name' => 'Employer2',
+            'email' => 'employer2@example.com',
+        ])->assignRole('employer');
     }
 }

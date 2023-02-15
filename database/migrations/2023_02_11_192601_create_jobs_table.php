@@ -21,6 +21,7 @@ return new class extends Migration
             $table->date('dueDate');
             $table->text('slug');
             $table->foreignId('user_id')->constrained()->onUpdate('cascade')->onDelete('cascade');
+            $table->foreignId('jobCategory')->constrained('categories')->onUpdate('cascade')->onDelete('cascade');
             $table->softDeletes();
             $table->timestamps();
         });
