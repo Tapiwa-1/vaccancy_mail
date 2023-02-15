@@ -4,12 +4,12 @@
     <div class="mx-auto max-w-full px-4 sm:px-6 ">
       <div class="flex items-center justify-between py-2 md:justify-start md:space-x-10">
         <div class="flex justify-start lg:w-0 lg:flex-1">
-          <router-link to="/" class="flex items-center">
+          <Link href="/" class="flex items-center">
 
             <img class="h-8 w-auto sm:h-10" src="../assets/logo.png" alt="" />
             <span class="font-bold text-2xl ml-2 text-blue-400 dark:text-blue-50 ">Vacancy <span class="text-blue-900 dark:text-blue-200">Mail</span> </span>
 
-          </router-link>
+          </Link>
         </div>
         <div class="-my-2 -mr-2 md:hidden">
           <button class="m-3" @click="toggleDark()">

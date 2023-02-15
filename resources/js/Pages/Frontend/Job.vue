@@ -20,7 +20,9 @@
                     <div class=" w-[400px]">
                          <div class=" md:max-w-md p-6 ">
                             <h5 class="mb-2 text-xl font-bold tracking-tight text-gray-900 dark:text-white">Job Categories</h5>
-                            <p v-for="category in categories" :key="category.id"  class="mb-2 text-sm tracking-tight text-gray-900 dark:text-white">{{category.name}}(0)</p>
+                            <div v-for="category in categories" :key="category.id" class="">
+                                <Link   :href="route('job.jobs-category', category.slug)"  class="mb-2 text-sm tracking-tight text-gray-900 dark:text-white">{{category.name}}({{category.jobs  }})</Link>
+                            </div>
 
                         </div>
                     </div>
@@ -45,6 +47,7 @@
 import Nav from '@/Layouts/Nav.vue';
 import JobDetails from '@/Components/JobDetails.vue';
 import { ref } from 'vue';
+import { Head, Link, useForm } from '@inertiajs/vue3';
 const props = defineProps({
     job: Object,
     categories: Object

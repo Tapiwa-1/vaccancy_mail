@@ -40,11 +40,16 @@ Route::get('/', function () {
     ]);
 });
 Route::get('/job/{slug}', function ($slug){
+    $categories =  Category::query()->withCount('jobs')->get();
+    $cat = array();
+    foreach($categories as $category){
+    array_push($cat, ['name'=> $category->name, 'jobs'=>$category->jobs_count, 'slug'=>$category->slug]);
+    }
     return Inertia::render('Frontend/Job',[
         'canLogin' => Route::has('login'),
         'canRegister' => Route::has('register'),
         'job'=> Job::with('user')->where('slug', $slug)->first(),
-        'categories'=> Category::all(),
+        'categories'=> $cat,
     ]);
 })->name('job.jobs-details');
 
