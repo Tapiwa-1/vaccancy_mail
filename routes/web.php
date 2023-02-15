@@ -26,8 +26,6 @@ use Inertia\Inertia;
 
 Route::get('/', function () {
     $categories =  Category::query()->withCount('jobs')->get();
-
-    // each $category in your collection will have a products_count attribute
     $cat = array();
     foreach($categories as $category){
     array_push($cat, ['name'=> $category->name, 'jobs'=>$category->jobs_count, 'slug'=>$category->slug]);
@@ -50,6 +48,22 @@ Route::get('/job/{slug}', function ($slug){
     ]);
 })->name('job.jobs-details');
 
+Route::get('/job-category/{slug}', function ($slug){
+    $categoryR = Category::where('slug',$slug)->first();
+    $categories =  Category::query()->withCount('jobs')->get();
+    $cat = array();
+    foreach($categories as $category){
+    array_push($cat, ['name'=> $category->name, 'jobs'=>$category->jobs_count, 'slug'=>$category->slug]);
+    }
+
+    return Inertia::render('Frontend/Welcome', [
+        'canLogin' => Route::has('login'),
+        'canRegister' => Route::has('register'),
+        'jobs' =>  Job::with('user')->where('jobCategory', $categoryR->id)->get(),
+        'categories'=> $cat,
+
+    ]);
+})->name('job.jobs-category');
 
 Route::get('/dashboard', function () {
 
