@@ -5,6 +5,7 @@ namespace App\Models;
 use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -34,11 +35,9 @@ class Category extends Model
         return 'slug';
     }
 
-    /**
-     * Get the Jobs for the category.
-     */
-    public function jobs(): HasMany
+    public function jobs() :HasMany
     {
-        return $this->hasMany(Job::class,'JobCategory');
+        return $this->hasMany(Job::class, 'jobCategory'); //job has many categories
     }
+
 }

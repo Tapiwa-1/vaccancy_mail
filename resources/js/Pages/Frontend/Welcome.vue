@@ -20,7 +20,7 @@
                     <div class=" w-[400px]">
                          <div class=" md:max-w-md p-6 ">
                             <h5 class="mb-2 text-xl font-bold tracking-tight text-gray-900 dark:text-white">Job Categories</h5>
-                            <p v-for="category in categories" :key="category.id"  class="mb-2 text-sm tracking-tight text-gray-900 dark:text-white">{{category.name}}(0)</p>
+                            <p v-for="category in categories" :key="category.id"  class="mb-2 text-sm tracking-tight text-gray-900 dark:text-white">{{category.name}}({{category.jobs  }})</p>
 
                         </div>
                     </div>
@@ -32,7 +32,6 @@
 
                     </div>
                 </div>
-
 
 
 
@@ -50,7 +49,8 @@ import JobCard from '@/Components/JobCard.vue';
 import { ref } from 'vue';
 const props = defineProps({
     jobs: Object,
-    categories: Object
+    categories: Object,
+    cat: Object,
 });
 
 </script>

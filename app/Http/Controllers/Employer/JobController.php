@@ -19,9 +19,7 @@ class JobController extends Controller
      */
     public function index()
     {
-        $jobs = User::find(Auth()->id())->jobs;
-        $category = Category::find()->jobs;
-        dd($category);
+        $jobs = Job::query()->with('category')->where('user_id', auth()->id())->get(); //getting jobs associated with the user
         return Inertia::render('Employer/Jobs/Index',compact('jobs'));
 
     }
@@ -61,7 +59,7 @@ class JobController extends Controller
             'jobDescription'=> $request->jobDescription,
             'dueDate'=> $request->dueDate,
             'jobSummary'=> $request->jobSummary,
-            'jobCategory'=> $jobCategory,
+            'jobCategory'=> $jobCategory[0],
             'user_id'=>Auth()->id(),
         ]);
         return to_route('employer.jobs.index')->with('message','job added successfully');

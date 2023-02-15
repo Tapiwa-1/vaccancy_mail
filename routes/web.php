@@ -25,11 +25,20 @@ use Inertia\Inertia;
 */
 
 Route::get('/', function () {
+    $categories =  Category::query()->withCount('jobs')->get();
+
+    // each $category in your collection will have a products_count attribute
+    $cat = array();
+    foreach($categories as $category){
+    array_push($cat, ['name'=> $category->name, 'jobs'=>$category->jobs_count, 'slug'=>$category->slug]);
+    }
+
     return Inertia::render('Frontend/Welcome', [
         'canLogin' => Route::has('login'),
         'canRegister' => Route::has('register'),
         'jobs' =>  Job::with('user')->get(),
-        'categories'=> Category::all(),
+        'categories'=> $cat,
+
     ]);
 });
 Route::get('/job/{slug}', function ($slug){
@@ -68,12 +77,6 @@ Route::middleware(['auth', 'role:admin'])->name('admin.')->prefix('admin')->grou
     Route::delete('/users/{user}/permissions/{permission}', [UserController::class, 'revokePermission'])->name('users.permissions.revoke');
 });
 
-/**
-     ** Employer routes here
-     ** Employer should create a job, edit, view or delete
-     *todo - Create a job resource Add, Edit, Show , delete
-
-*/
 Route::middleware(['auth', 'role:employer'])->name('employer.')->prefix('employer')->group(function () {
     Route::get('/', function () {
         return Inertia::render('Employer/Dashboard');

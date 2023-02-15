@@ -43,9 +43,14 @@ class Job extends Model
     /**
      * Get the Job that owns the user.
      */
-    public function user(): HasMany
+    public function user(): BelongsTo
     {
-        return $this->hasMany(User::class);
+        return $this->belongsTo(User::class); //this job belongs to one user
+    }
+
+     public function category() :BelongsTo
+    {
+        return $this->belongsTo(Category::class, 'jobCategory'); //this category belongs to one job
     }
 
 
