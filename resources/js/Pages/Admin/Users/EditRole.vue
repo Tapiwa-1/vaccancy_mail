@@ -22,13 +22,13 @@ const form = useForm({
 });
 
 const submitRole = () => {
-    form.post(route('admin.users.roles', props.userDetails.id),{
+    form.post(route('admin.users.roles', props.userDetails.slug),{
         preserveScroll: true,
     }
     );
 };
 const submitPermission = () => {
-    form.post(route('admin.roles.permission', props.userDetails.id),{
+    form.post(route('admin.roles.permission', props.userDetails.slug),{
         preserveScroll: true,
     }
     );

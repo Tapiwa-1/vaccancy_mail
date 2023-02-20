@@ -25,12 +25,7 @@ use Inertia\Inertia;
 */
 
 Route::get('/', function () {
-    $categories =  Category::query()->withCount('jobs')->get();
-    $cat = array();
-    foreach($categories as $category){
-    array_push($cat, ['name'=> $category->name, 'jobs'=>$category->jobs_count, 'slug'=>$category->slug]);
-    }
-
+    include('category.php');
     return Inertia::render('Frontend/Welcome', [
         'canLogin' => Route::has('login'),
         'canRegister' => Route::has('register'),
@@ -40,11 +35,7 @@ Route::get('/', function () {
     ]);
 });
 Route::get('/job/{slug}', function ($slug){
-    $categories =  Category::query()->withCount('jobs')->get();
-    $cat = array();
-    foreach($categories as $category){
-    array_push($cat, ['name'=> $category->name, 'jobs'=>$category->jobs_count, 'slug'=>$category->slug]);
-    }
+    include('category.php');
     return Inertia::render('Frontend/Job',[
         'canLogin' => Route::has('login'),
         'canRegister' => Route::has('register'),
@@ -54,19 +45,12 @@ Route::get('/job/{slug}', function ($slug){
 })->name('job.jobs-details');
 
 Route::get('/job-category/{slug}', function ($slug){
-    $categoryR = Category::where('slug',$slug)->first();
-    $categories =  Category::query()->withCount('jobs')->get();
-    $cat = array();
-    foreach($categories as $category){
-    array_push($cat, ['name'=> $category->name, 'jobs'=>$category->jobs_count, 'slug'=>$category->slug]);
-    }
-
+    include('category_slug.php');
     return Inertia::render('Frontend/Welcome', [
         'canLogin' => Route::has('login'),
         'canRegister' => Route::has('register'),
         'jobs' =>  Job::with('user')->where('jobCategory', $categoryR->id)->get(),
         'categories'=> $cat,
-
     ]);
 })->name('job.jobs-category');
 
@@ -81,10 +65,10 @@ Route::middleware(['auth', 'role:admin'])->name('admin.')->prefix('admin')->grou
         return Inertia::render('Admin/Dashboard');
     })->name('index');
     Route::resource('/roles', RoleController::class);
-    Route::post('/roles/{role}/permissions', [RoleController::class, 'givePermission'])->name('roles.permission');
+    Route::post('/roles/{slug}/permissions', [RoleController::class, 'givePermission'])->name('roles.permission');
     Route::delete('/roles/{role}/permissions/{permission}', [RoleController::class, 'revokePermission'])->name('roles.permissions.revoke');
     Route::resource('/permissions', PermissionController::class);
-    Route::post('/permissions/{permission}/roles', [PermissionController::class, 'assignRole'])->name('permissions.role');
+    Route::post('/permissions/{slug}/roles', [PermissionController::class, 'assignRole'])->name('permissions.role');
     Route::delete('/permissions/{permission}/roles/{role}', [PermissionController::class, 'removeRole'])->name('permissions.roles.remove');
     Route::resource('/categories', CategoryController::class);
 
@@ -101,6 +85,13 @@ Route::middleware(['auth', 'role:employer'])->name('employer.')->prefix('employe
         return Inertia::render('Employer/Dashboard');
     })->name('index');
     Route::resource('/jobs', JobController::class);
+});
+
+Route::middleware(['auth', 'role:user'])->name('user.')->prefix('user')->group(function () {
+    Route::get('/', function () {
+        return Inertia::render('User/Dashboard');
+    })->name('index');
+
 });
 
 Route::middleware('auth')->group(function () {
