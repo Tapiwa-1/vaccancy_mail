@@ -40,7 +40,7 @@
     >
       <div class="text-gray-100 text-xl" >
         <div class="p-2.5 mt-1 flex items-center">
-          <h1 class="font-bold text-gray-800 dark:text-gray-200 text-[15px] ml-3">Vacancy Mail</h1>
+          <h1 class="font-bold text-gray-800 dark:text-gray-200 text-[15px] ml-3">Vaccancy Mail</h1>
           <XMarkIcon class="w-6 h-6 cursor-pointer ml-28 text-gray-900 dark:text-gray-200 " @click="display = false"/>
         </div>
         <div class="my-2 bg-gray-600 h-[1px]"></div>
@@ -96,17 +96,18 @@
       </div>
        <div v-if="$page.props.user.userRoles.includes('user')">
             <Link :href="route('user.index')"
-            class="p-2.5 mt-3 flex items-center rounded-md px-4 duration-300 cursor-pointer bg-blue-100 dark:bg-gray-700 dark:hover:bg-blue-500 hover:bg-blue-600 text-white"
+              class="p-2.5 mt-3 flex items-center rounded-md px-4 duration-300 cursor-pointer bg-blue-100 dark:bg-gray-700 dark:hover:bg-blue-500 hover:bg-blue-600 text-white"
             >
                 <HomeIcon class="h-6 w-6 text-gray-900 dark:text-gray-200 "/>
                 <span class="text-[15px] ml-4 text-gray-900 dark:text-gray-200  font-bold">Dashboard</span>
             </Link>
-            <!-- <Link :href="route('employer.jobs.index')"
-            class="p-2.5 mt-3 flex items-center rounded-md px-4 duration-300 cursor-pointer bg-blue-100 dark:bg-gray-700 dark:hover:bg-blue-500 hover:bg-blue-600 text-white"
+            <Link :href="route('user.resume.index')"
+              class="p-2.5 mt-3 flex items-center rounded-md px-4 duration-300 cursor-pointer bg-blue-100 dark:bg-gray-700 dark:hover:bg-blue-500 hover:bg-blue-600 text-white"
             >
-                <BriefcaseIcon class="h-6 w-6 text-gray-900 dark:text-gray-200 "/>
-                <span class="text-[15px] ml-4 text-gray-900 dark:text-gray-200  font-bold">Jobs</span>
-            </Link> -->
+                <DocumentPlusIcon class="h-6 w-6 text-gray-900 dark:text-gray-200 "/>
+                <span class="text-[15px] ml-4 text-gray-900 dark:text-gray-200  font-bold">Resume</span>
+            </Link>
+          
       </div>
 
     </div>
@@ -139,7 +140,8 @@
        UserGroupIcon,
        UsersIcon,
        KeyIcon,
-       BriefcaseIcon
+       BriefcaseIcon,
+       DocumentPlusIcon,
     } from '@heroicons/vue/24/outline'
     import { ref } from 'vue';
 

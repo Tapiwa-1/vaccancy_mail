@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Employer\JobController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\User\ResumeController;
 use App\Models\Category;
 use App\Models\Job;
 use App\Models\User;
@@ -91,7 +92,7 @@ Route::middleware(['auth', 'role:user'])->name('user.')->prefix('user')->group(f
     Route::get('/', function () {
         return Inertia::render('User/Dashboard');
     })->name('index');
-
+    Route::resource('/resume', ResumeController::class);
 });
 
 Route::middleware('auth')->group(function () {

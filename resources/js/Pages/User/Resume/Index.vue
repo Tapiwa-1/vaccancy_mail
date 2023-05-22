@@ -11,15 +11,15 @@ defineProps({
     <Head title="Admin | Dashboard" />
     <AuthenticatedLayout>
         <template #header>
-            <h2 class="font-semibold text-xl text-gray-800 dark:text-white leading-tight">Your Dashboard</h2>
+            <h2 class="font-semibold text-xl text-gray-800 dark:text-white leading-tight">Your Resume Here</h2>
         </template>
 
         <div class="py-12">
             <div class="max-w-7xl min-h-screen mx-auto sm:px-6 lg:px-8">
                 <div class=" overflow-hidden shadow-sm sm:rounded-lg">
-                    <Link :href="route('employer.jobs.create')"  class=" inline-flex items-center justify-center p-0.5 mb-2 mr-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-purple-600 to-blue-500 group-hover:from-purple-600 group-hover:to-blue-500 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800">
+                    <Link :href="route('user.resume.create')"  class=" inline-flex items-center justify-center p-0.5 mb-2 mr-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-purple-600 to-blue-500 group-hover:from-purple-600 group-hover:to-blue-500 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800">
                         <span class=" px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
-                            Post a Job
+                            Create/Edit Resume
                         </span>
                      </Link>
                 <div class="bg-white dark:bg-gray-900 overflow-hidden shadow-sm sm:rounded-lg">
@@ -43,20 +43,18 @@ defineProps({
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr v-for="job in jobs" :key="job.id" class="bg-white border-b dark:bg-gray-900 dark:border-gray-700">
+                                <tr  class="bg-white border-b dark:bg-gray-900 dark:border-gray-700">
                                     <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                        {{job.jobTitle  }}
+                                        sample
                                     </th>
                                      <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                        {{job.category.name  }}
+                                        sample
                                     </th>
                                      <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                        {{job.dueDate  }}
+                                        sample
                                     </th>
                                     <td class="px-6 py-4">
-                                        <Link :href="route('employer.jobs.show',job.slug)" class="font-medium mr-1 text-blue-600 dark:text-blue-500 hover:underline">Show</Link>
-                                          <Link :href="route('employer.jobs.edit',job.slug)" class="font-medium mr-1 text-blue-600 dark:text-blue-500 hover:underline">Edit</Link>
-                                        <Link method="delete" as="button" ae :href="route('employer.jobs.destroy', job.slug)"  class="font-medium text-red-600 dark:text-red-500 hover:underline">Delete</Link>
+                                       sample
                                     </td>
                                 </tr>
                             </tbody>
