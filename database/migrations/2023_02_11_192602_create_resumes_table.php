@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id();
             $table->text('jobTitle');
             $table->text('resumeDetails');
+            $table->text('slug');
             $table->foreignId('user_id')->constrained()->onUpdate('cascade')->onDelete('cascade');
             $table->softDeletes();
             $table->timestamps();

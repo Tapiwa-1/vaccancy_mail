@@ -7,7 +7,7 @@
           <Link href="/" class="flex items-center">
 
             <img class="h-8 w-auto sm:h-10" src="../assets/logo.png" alt="" />
-            <span class="font-bold text-2xl ml-2 text-blue-400 dark:text-blue-50 ">Vaccancy <span class="text-blue-900 dark:text-blue-200">Mail</span> </span>
+            <span class="font-bold text-2xl ml-2 text-green-400 dark:text-green-50 ">MLG <span class="text-green-800 dark:text-green-200">JOBS</span> </span>
 
           </Link>
         </div>

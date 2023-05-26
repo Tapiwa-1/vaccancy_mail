@@ -45,6 +45,7 @@ class ResumeController extends Controller
             'resumeDetails' => 'required',
         ]);
         Resume::create([
+            'jobTitle'=> $request->jobTitle,
             'resumeDetails' => $request->resumeDetails,
             'user_id'=>Auth()->id(),
         ]);
