@@ -16,7 +16,7 @@
 | <img  src="/public/Screenshots/1.png"/> | <img  src="/public/Screenshots/3.png"/> |
 | --------------------------------------- | --------------------------------------- |
 | <img  src="/public/Screenshots/2.png"/> | <img  src="/public/Screenshots/4.png"/> |
-| -------------                           | -------------                           |
+
 
 ## Installation### Pre requisite
 
